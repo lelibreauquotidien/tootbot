@@ -8,4 +8,5 @@ days=1
 tags=
 delay=0
 [NITTER]
-instance=https://nitter.net # Instance list : https://github.com/zedeus/nitter/wiki/Instances
+# Instances list : https://github.com/zedeus/nitter/wiki/Instances
+instance=https://nitter.net/
