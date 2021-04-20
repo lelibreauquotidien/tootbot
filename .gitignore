@@ -1,3 +1,4 @@
 *.secret
 cron.sh
-
+tootbot.ini
+tootbot.db

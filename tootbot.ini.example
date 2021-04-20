@@ -1,0 +1,11 @@
+[SOURCE]
+twitter=twitter_account_to_mirror
+[MASTODON]
+instance=mastodon.example
+login=yourmastodonaccountemail@mail.com
+passwd=yourMastodonAccountPassword
+days=1
+tags=
+delay=0
+[NITTER]
+instance=https://nitter.net # Instance list : https://github.com/zedeus/nitter/wiki/Instances
