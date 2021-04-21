@@ -17,7 +17,7 @@ config = configparser.ConfigParser()
 config.read(args.configuration)
 
 mstdn = config["MASTODON"]
-nitter = config["NITTER"]
+nitter = config["NITTER"]["instance"]
 source = config["SOURCE"]
 print("TOOTBOT, official git forge: https://github.com/lelibreauquotidien/tootbot")
 
@@ -43,11 +43,9 @@ mastodon_api = None
 
 print("[INFO]: Parse rss...")
 
-url = nitter["instance"]+source+'/rss'
-print(url)
+url = nitter+source+'/rss'
 rss_feed = feedparser.parse(url)
 twitter = source
-print('for')
 for tweet in reversed(rss_feed.entries):
     # check if this tweet has been processed
     db.execute('SELECT * FROM tweets WHERE tweet = ? AND twitter = ?  and mastodon = ? and instance = ?', (tweet.id, source, login, instance))  # noqa
@@ -90,7 +88,7 @@ for tweet in reversed(rss_feed.entries):
 
         toot_media = []
         # get the pictures...
-        for match in re.finditer("https://nitter.tedomum.net/pic/media(.*).jpg", tweet.summary):
+        for match in re.finditer(nitter + "pic/media(.*).jpg", tweet.summary):
             media = requests.get(match.group(0))
             media_posted = mastodon_api.media_post(media.content, mime_type=media.headers.get('content-type'))
             toot_media.append(media_posted['id'])
